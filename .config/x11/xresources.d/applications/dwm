@@ -1,0 +1,10 @@
+dwm.basicFont:          monospace:size=14
+dwm.dmenuFont:          monospace:size=14
+
+dwm.normalBackground:   bkgrnd
+dwm.normalForeground:   frgrnd
+dwm.normalBorder:       lgt_blk
+
+dwm.selectBackground:   drk_grn
+dwm.selectForeground:   bkgrnd
+dwm.selectBorder:       lgt_wht

@@ -1,0 +1,15 @@
+#!/bin/sh
+#  _ __ ___    ___  _ __ ___    ___   _ __  _   _
+# | '_ ` _ \  / _ \| '_ ` _ \  / _ \ | '__|| | | |
+# | | | | | ||  __/| | | | | || (_) || |   | |_| |
+# |_| |_| |_| \___||_| |_| |_| \___/ |_|    \__, |
+#                                           |___/
+#
+# by Tomislav Nikic (code at nikic dot dev)
+
+total_memory=$(free | grep Mem | awk '{ print $2 }')
+free_memory=$(free | grep Mem | awk '{ print $3 }')
+
+percentage=$(bc <<< "scale=2; $free_memory/$total_memory*100" | awk -F. '{ print $1 }')
+
+echo " $percentage%"

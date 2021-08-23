@@ -1,0 +1,15 @@
+#!/bin/sh
+
+current_directory=$(pwd)
+
+# ---
+# -- Backup to dotfiles folder
+# -
+
+backup_folder="$HOME/.dotfiles"
+selected_folder=$2
+
+mkdir -pv $(dirname "$backup_folder/$selected_folder")
+
+mv -i "$HOME/$selected_folder" "$backup_folder/$selected_folder"
+ln -s "$backup_folder/$selected_folder" "$HOME/$selected_folder"

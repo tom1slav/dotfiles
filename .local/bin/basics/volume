@@ -1,0 +1,46 @@
+#!/bin/sh
+#
+#                       ████
+#                      ▒▒███
+#  █████ █████  ██████  ▒███  █████ ████ █████████████    ██████
+# ▒▒███ ▒▒███  ███▒▒███ ▒███ ▒▒███ ▒███ ▒▒███▒▒███▒▒███  ███▒▒███
+#  ▒███  ▒███ ▒███ ▒███ ▒███  ▒███ ▒███  ▒███ ▒███ ▒███ ▒███████
+#  ▒▒███ ███  ▒███ ▒███ ▒███  ▒███ ▒███  ▒███ ▒███ ▒███ ▒███▒▒▒
+#   ▒▒█████   ▒▒██████  █████ ▒▒████████ █████▒███ █████▒▒██████
+#    ▒▒▒▒▒     ▒▒▒▒▒▒  ▒▒▒▒▒   ▒▒▒▒▒▒▒▒ ▒▒▒▒▒ ▒▒▒ ▒▒▒▒▒  ▒▒▒▒▒▒
+#
+# by Tomislav Nikic (code at nikic dot dev)
+
+# --------------------------------------------------
+# Data
+# --------------------------------------------------
+current_volume=$(amixer -M sget Master | grep %] | awk '{ print $4 }' | tr -d '[]')
+current_value=$(echo $current_volume | tr -d '%')
+
+# --------------------------------------------------
+# Music
+# --------------------------------------------------
+title=$(mpc current | awk -F'-' '{ print $2 }')
+if [ ! -z "$title" ]; then
+  state=''
+  if [ ! -z "$(mpc | grep playing)" ]; then
+    state='奈'
+  fi
+  song="$state $title  "
+fi
+
+# --------------------------------------------------
+# Volume
+# --------------------------------------------------
+save() {
+  alsactl --file $XDG_DATA_HOME/alsa/main.state store
+}
+
+# --------------------------------------------------
+# Switcher
+# --------------------------------------------------
+case $1 in
+  inc) amixer -M sset Master $(echo "$current_value+5" | bc)%; pkill -RTMIN+10 blocks; save;;
+  dec) amixer -M sset Master $(echo "$current_value-5" | bc)%; pkill -RTMIN+10 blocks; save;;
+  *) echo $song $current_volume;;
+esac

@@ -1,0 +1,6 @@
+! Definitions
+#include "colors"
+
+! Applications
+#include "applications/dwm"
+#include "applications/st"

@@ -1,0 +1,70 @@
+#!/bin/bash
+
+# Initialize variables
+count_video=0
+count_skipped=0
+count_transfered=0
+
+# Get all the files
+result=$(find $1 -type f)
+files=$(echo $result | sed 's/ /###/g' | sed 's/###\/home/ \/home/g')
+counter=0
+clear
+
+# File loop
+for file in $(echo $files)
+do
+	# Update the progress
+	counter=$(($counter+1))
+	listcount=$(echo "$files" | wc -w)
+	percent=$(bc -l <<< $counter/$listcount*100 | xargs printf "%.*f\n" "$p")
+	echo -ne "$percent% exact: $counter/$listcount"\\r
+
+	# Check if it is a video file
+	file=$(echo $file | sed 's/###/ /g')
+	if [[ "$file" == *mp4 ]] || [[ "$file" == *MPG ]] || [[ "$file" == *mov ]]; then
+		echo "! Skip video $file"
+		count_video=$(($count_video+1))
+		continue
+	fi
+	framecount=$(identify "$file" 2> /dev/null | wc -l)
+	if [ $framecount != 1 ]; then
+		echo "! Skip video $file"
+		count_video=$(($count_video+1))
+		continue
+	fi
+
+	# Get all the meta data
+	info=$(identify -verbose "$file")
+
+	# Extract relevant information
+	filetype=$(echo "$info" | grep -m 1 'Format:' | awk '{ print tolower($2) }') 
+	date=$(echo "$info" | grep -i "DateTimeOriginal" | awk '{ print $2 ":" $3 }' | sed s'/[T+/-]/:/g' | sort -n | head -n 1)
+	year=$(echo $date | awk -F '[T+:-]' '{ print $1 }')
+	if [ "$year" == "" ]; then
+		echo "! Skip $file"
+		count_skipped=$(($count_skipped+1))
+		continue
+	fi
+	month=$(echo $date | awk -F '[T+:-]' '{ print $2 }')
+	day=$(echo $date | awk -F '[T+:-]' '{ print $3 }')
+	hour=$(echo $date | awk -F '[T+:-]' '{ print $4 }')
+	minute=$(echo $date | awk -F '[T+:-]' '{ print $5 }')
+	second=$(echo $date | awk -F '[T+:-]' '{ print $6 }')
+
+	# Prepare folder structure
+	mkdir -p $year/$month
+
+	# Copy the files to the new location
+	new_path="./$year/$month/$year$month$day-$hour$minute$second"
+	if [ ! -e "$new_path.$filetype" ]; then
+		cp -vn "$file" "$new_path.$filetype"
+	else
+		cp -vn "$file" "$new_path-$((RANDOM%9000+1000)).$filetype"
+	fi
+
+	count_transfered=$(($count_transfered+1))
+done
+
+clear
+echo "All done. Transfered $count_transfered images. Skipped $count_video videos and $count_skipped other files."

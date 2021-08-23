@@ -1,0 +1,24 @@
+! ------------------------------
+! Colors
+! ---
+
+st.color0:       drk_blk
+st.color1:       drk_red
+st.color2:       drk_grn
+st.color3:       drk_yel
+st.color4:       drk_blu
+st.color5:       drk_mag
+st.color6:       drk_cyn
+st.color7:       drk_wht
+
+st.color8:       lgt_blk
+st.color9:       lgt_red
+st.color10:      lgt_grn
+st.color11:      lgt_yel
+st.color12:      lgt_blu
+st.color13:      lgt_mag
+st.color14:      lgt_cyn
+st.color15:      lgt_wht
+
+st.foreground:   frgrnd
+st.background:   bkgrnd

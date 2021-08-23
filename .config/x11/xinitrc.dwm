@@ -1,0 +1,9 @@
+[[ -f $XRESOURCES_HOME/init ]] && xrdb -merge -I$XRESOURCES_HOME $XRESOURCES_HOME/init
+
+picom &
+dunst &
+
+feh --no-fehbg --bg-fill --randomize ~/images/wallpapers/* &
+
+blocks &
+exec dwm

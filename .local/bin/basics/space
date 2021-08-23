@@ -1,0 +1,5 @@
+#!/bin/sh
+
+percentage_internal=$(df -h / | grep /dev* | awk '{ print $5 }')
+
+echo " $percentage_internal"
