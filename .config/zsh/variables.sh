@@ -7,6 +7,7 @@
 export TERM="st-256color"
 export EDITOR="nvim"
 export MANPAGER="nvim -c 'set ft=man' -"
+export GPG_TTY=$(tty)
 
 # ------------------------------
 # History

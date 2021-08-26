@@ -1,0 +1,11 @@
+#!/bin/sh
+
+games="ckb-next\|tsm\|ffxiv\|lutris"
+
+case $1 in
+  kill) ps -e | grep -i $games | awk '{ print $1 }' | xargs kill ;;
+  start)
+    gamemoderun lutris lutris:rungameid/5&
+    ckb-next -b
+    ;;
+esac

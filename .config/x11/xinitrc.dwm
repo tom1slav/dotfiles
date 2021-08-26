@@ -2,6 +2,7 @@
 
 picom &
 dunst &
+flameshot &
 
 feh --no-fehbg --bg-fill --randomize ~/images/wallpapers/* &
 
