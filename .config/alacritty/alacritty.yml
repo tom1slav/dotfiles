@@ -1,0 +1,45 @@
+env:
+  TERM: alacritty
+
+window:
+  padding:
+    x: 25
+    y: 15
+
+scrolling:
+  history: 10000
+
+font:
+  normal:
+    family: JetBrains Mono
+    style: Regular
+  bold:
+    family: JetBrains Mono
+    style: Bold
+  italic:
+    family: JetBrains Mono
+    style: Italic
+  size: 14.0
+
+colors:
+  primary:
+    background: '#2b3339'
+    foreground: '#d3c6aa'
+  normal:
+    black:   '#4b565c'
+    red:     '#e67e80'
+    green:   '#a7c080'
+    yellow:  '#dbbc7f'
+    blue:    '#7fbbb3'
+    magenta: '#d699b6'
+    cyan:    '#83c092'
+    white:   '#d3c6aa'
+  bright:
+    black:   '#4b565c'
+    red:     '#e67e80'
+    green:   '#a7c080'
+    yellow:  '#dbbc7f'
+    blue:    '#7fbbb3'
+    magenta: '#d699b6'
+    cyan:    '#83c092'
+    white:   '#d3c6aa'

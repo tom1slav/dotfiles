@@ -1,0 +1,42 @@
+! ------------------------------
+! Color Palette
+! ---
+
+! --- Black
+#define drk_blk   #4b565c
+#define lgt_blk   #4b565c
+
+! --- Red
+#define drk_red   #e67e80
+#define lgt_red   #e67e80
+
+! --- Green
+#define drk_grn   #a7c080
+#define lgt_grn   #a7c080
+
+! --- Yellow
+#define drk_yel   #dbbc7f
+#define lgt_yel   #dbbc7f
+
+! --- Blue
+#define drk_blu   #7fbbb3
+#define lgt_blu   #7fbbb3
+
+! --- Magenta
+#define drk_mag   #d699b6
+#define lgt_mag   #d699b6
+
+! --- Cyan
+#define drk_cyn   #83c092
+#define lgt_cyn   #83c092
+
+! --- White
+#define drk_wht   #d3c6aa
+#define lgt_wht   #d3c6aa
+
+! ------------------------------
+! Special Colors
+! ---
+
+#define bkgrnd    #2b3339
+#define frgrnd    #d3c6aa

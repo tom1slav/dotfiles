@@ -1,0 +1,9 @@
+[user]
+  name = Tomislav Nikic
+	email = hello@nikic.dev
+[init]
+  defaultBranch = main
+[alias]
+  save = !git add -A && git commit -m 'save point'
+  undo = reset HEAD~1 --mixed
+  done = push origin HEAD
